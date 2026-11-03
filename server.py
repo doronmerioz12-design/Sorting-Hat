@@ -96,7 +96,7 @@ async def sort_character(name: str, universe: str, user_id: str = "guest"):
             """
 
             response = client_ai.models.generate_content(
-                model="gemini-3.1-flash-lite-preview",
+                model="gemini-2.5-flash",
                 contents=prompt_text
             )
 
