@@ -17,7 +17,7 @@ class HistoryManager:
     async def get_cached_person(self, user_id: str, name: str) -> Optional[Person]:
         """
         get_cached_person is responsible for getting the person from the database
-        it lunches and check if the person and the respected house\ nation
+        it lunches and check if the person and the respected house/nation
         exists in the database and if so get it in a suited format using the function
         'from_dict' of the class person
         using await is to make sure our program doesn't halt until it received the answer
