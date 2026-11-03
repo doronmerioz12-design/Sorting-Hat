@@ -55,3 +55,10 @@ class HistoryManager:
             {"$set": person_dict},
             upsert=True
         )
+
+    async def clear_history(self):
+        """
+        clear_history removes all cached sorting history from the MongoDB collection.
+        Called on server startup so each launch begins with a fresh history.
+        """
+        await collection.delete_many({})

@@ -2,6 +2,7 @@ import os
 import json
 import traceback
 from google import genai
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
@@ -19,7 +20,15 @@ from core.history_manager import HistoryManager
 # Server configuration and global constants
 SERVER_IP = "http://127.0.0.1:8000"
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Clear the database history each time the server launches
+    await history_manager.clear_history()
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 # Enable CORS for local development and frontend-backend communication
 app.add_middleware(
